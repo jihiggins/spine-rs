@@ -16,7 +16,6 @@ mod result {
 pub use error::*;
 pub use result::*;
 
-pub use image;
 pub use spine_sys as sys;
 
 #[cfg(feature = "glium")]

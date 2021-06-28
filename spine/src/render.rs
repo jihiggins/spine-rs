@@ -1,6 +1,7 @@
 use std::{path::Path, rc::Rc};
+use std::ptr::NonNull;
 
-use image::DynamicImage;
+use spine_sys::spAtlasPage;
 
 use super::{atlas::Atlas, error::Error, geometry::Vertex, result::Result, skeleton::Skeleton};
 
@@ -8,7 +9,7 @@ pub trait Renderer: Sized {
     type Texture;
     type Frame;
 
-    fn build_texture(&self, texture: &DynamicImage) -> Result<Self::Texture>;
+    fn build_texture(&self, texture: NonNull<spAtlasPage>) -> Result<Self::Texture>;
     fn add_texture(&mut self, id: usize, texture: Self::Texture);
     fn get_texture(&self, id: &usize) -> Option<&Self::Texture>;
 

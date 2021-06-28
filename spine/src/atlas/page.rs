@@ -1,6 +1,5 @@
 use std::{ffi::CStr, marker::PhantomData, ptr::NonNull};
 
-use image::DynamicImage;
 use spine_sys::spAtlasPage;
 
 use crate::{error::Error, result::Result};
@@ -24,10 +23,7 @@ impl<'a> AtlasPage<'a> {
     }
 
     #[inline]
-    pub fn texture(&self) -> &DynamicImage {
-        unsafe {
-            let pointer = self.pointer.as_ref().rendererObject as *mut DynamicImage;
-            pointer.as_ref().unwrap()
-        }
+    pub fn texture(&self) -> NonNull<spAtlasPage> {
+        self.pointer
     }
 }
